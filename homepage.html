@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jaclyn Beattie — Homepage</title>
+  <style>
+    :root {
+      --color-text-primary:        #1a1a1a;
+      --color-text-secondary:      #5e5d5b;
+      --color-text-tertiary:       #9a948a;
+      --color-text-info:           #2c5fa8;
+
+      --color-background-primary:  #ffffff;
+      --color-background-secondary:#f5f2ea;
+      --color-background-tertiary: #e8e3d4;
+
+      --color-border-tertiary:     rgba(0, 0, 0, 0.08);
+      --color-border-secondary:    rgba(0, 0, 0, 0.16);
+
+      --font-sans:  -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      --font-serif: "Georgia", "Times New Roman", serif;
+
+      --max-width: 1240px;
+      --gutter: 40px;
+      --radius-md: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text-primary);
+      background: var(--color-background-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .section-heading {
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.25;
+      margin: 0;
+      color: var(--color-text-primary);
+    }
+    .section-head-center {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      border: 0.5px solid transparent;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn--primary {
+      background: var(--color-text-primary);
+      color: var(--color-background-primary);
+    }
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-text-primary);
+      border-color: var(--color-border-secondary);
+    }
+    .btn--invert {
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+    }
+    .btn--ghost-invert {
+      background: transparent;
+      color: var(--color-background-primary);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    /* Header */
+    .header {
+      border-bottom: 0.5px solid var(--color-border-secondary);
+      background: var(--color-background-primary);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      gap: 16px;
+    }
+    .header__logo {
+      font-size: 13px;
+      padding: 8px 16px;
+      border: 0.5px dashed var(--color-border-secondary);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+    }
+    .header__nav {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+    }
+    .header__nav span { cursor: default; }
+    .header__menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 6px;
+      color: var(--color-text-primary);
+      font-size: 20px;
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--color-background-secondary);
+      border-bottom: 0.5px solid var(--color-border-secondary);
+    }
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .hero__copy { max-width: 520px; }
+    .hero__eyebrow {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    .hero__headline {
+      font-size: 44px;
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--color-text-primary);
+      margin: 0 0 20px;
+    }
+    .hero__sub {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin: 0 0 28px;
+    }
+    .hero__buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .hero__trust {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      letter-spacing: 0.5px;
+    }
+    .hero__image {
+      aspect-ratio: 4/5;
+      background: var(--color-background-tertiary);
+      border: 0.5px dashed var(--color-border-secondary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-tertiary);
+      font-size: 12px;
+      text-align: center;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    /* Services */
+    .services {
+      background: var(--color-background-primary);
+      border-bottom: 0.5px solid var(--color-border-secondary);
+    }
+    .services__inner {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .service-card {
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      background: var(--color-background-primary);
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card__image {
+      aspect-ratio: 1;
+      background: var(--color-background-tertiary);
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+    .service-card__title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .service-card__copy {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.55;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+    .service-card__link {
+      font-size: 13px;
+      color: var(--color-text-info);
+    }
+
+    /* Process */
+    .process {
+      background: var(--color-background-secondary);
+      border-bottom: 0.5px solid var(--color-border-secondary);
+    }
+    .process__inner {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    .process__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .process__step { text-align: center; }
+    .process__num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-background-primary);
+      border: 0.5px solid var(--color-border-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .process__title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .process__copy {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    /* Featured work */
+    .featured {
+      background: var(--color-background-primary);
+      border-bottom: 0.5px solid var(--color-border-secondary);
+    }
+    .featured__inner {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    .featured__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 28px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .featured__filters {
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      flex-wrap: wrap;
+    }
+    .filter-chip {
+      padding: 6px 14px;
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 999px;
+    }
+    .filter-chip--active {
+      border-color: var(--color-border-secondary);
+      color: var(--color-text-primary);
+    }
+    .featured__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .featured__tile {
+      aspect-ratio: 3/4;
+      background: var(--color-background-tertiary);
+      border: 0.5px dashed var(--color-border-secondary);
+      border-radius: 4px;
+      display: flex;
+      align-items: end;
+      padding: 12px;
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+    }
+    .featured__cta {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--color-text-info);
+    }
+
+    /* About */
+    .about {
+      background: var(--color-background-secondary);
+      border-bottom: 0.5px solid var(--color-border-secondary);
+    }
+    .about__inner {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 48px;
+      align-items: center;
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    .about__image {
+      aspect-ratio: 1;
+      background: var(--color-background-tertiary);
+      border: 0.5px dashed var(--color-border-secondary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-tertiary);
+      font-size: 12px;
+    }
+    .about__heading {
+      font-size: 28px;
+      font-weight: 500;
+      margin: 0 0 14px;
+    }
+    .about__bio {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin: 0 0 24px;
+      max-width: 540px;
+    }
+    .about__stats {
+      display: flex;
+      gap: 32px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+    .about__stats strong {
+      display: block;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 2px;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background: var(--color-background-primary);
+      border-bottom: 0.5px solid var(--color-border-secondary);
+    }
+    .testimonials__inner {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .testimonial {
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      background: var(--color-background-primary);
+    }
+    .testimonial__quote {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin: 0 0 18px;
+    }
+    .testimonial__name {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .testimonial__role {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* Shop */
+    .shop {
+      background: var(--color-background-secondary);
+      border-bottom: 0.5px solid var(--color-border-secondary);
+    }
+    .shop__inner {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    .shop__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 28px;
+      gap: 24px;
+    }
+    .shop__link {
+      font-size: 13px;
+      color: var(--color-text-info);
+    }
+    .shop__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .product__image {
+      aspect-ratio: 1;
+      background: var(--color-background-tertiary);
+      border: 0.5px dashed var(--color-border-secondary);
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .product__name {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .product__price {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    /* CTA band */
+    .cta {
+      background: var(--color-text-primary);
+      color: var(--color-background-primary);
+    }
+    .cta__inner {
+      padding-top: 72px;
+      padding-bottom: 72px;
+      text-align: center;
+    }
+    .cta__title {
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.25;
+      margin: 0 0 14px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta__copy {
+      font-size: 14px;
+      opacity: 0.7;
+      margin: 0 0 28px;
+      line-height: 1.6;
+    }
+    .cta__buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-background-primary);
+    }
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 32px;
+      padding-top: 48px;
+      padding-bottom: 48px;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+    }
+    .footer h4 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin: 0 0 12px;
+    }
+    .footer__brand-logo {
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 14px;
+      border: 0.5px dashed var(--color-border-secondary);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      margin-bottom: 14px;
+    }
+    .footer__newsletter {
+      line-height: 1.6;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+      max-width: 320px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 9px 12px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-family: inherit;
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+    }
+    .newsletter-form button {
+      padding: 9px 14px;
+      background: var(--color-text-primary);
+      color: var(--color-background-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+    }
+    .footer ul { list-style: none; padding: 0; margin: 0; line-height: 2; }
+    .footer__bottom {
+      border-top: 0.5px solid var(--color-border-tertiary);
+      padding-top: 18px;
+      padding-bottom: 18px;
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Tablet */
+    @media (max-width: 960px) {
+      :root { --gutter: 28px; }
+      .hero__inner { grid-template-columns: 1fr; gap: 36px; padding-top: 56px; padding-bottom: 56px; }
+      .hero__headline { font-size: 36px; }
+      .hero__image { max-width: 480px; }
+      .services__inner,
+      .process__inner,
+      .featured__inner,
+      .testimonials__inner,
+      .shop__inner,
+      .cta__inner { padding-top: 56px; padding-bottom: 56px; }
+      .about__inner { grid-template-columns: 1fr; gap: 32px; padding-top: 56px; padding-bottom: 56px; }
+      .about__image { max-width: 360px; }
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials__grid { grid-template-columns: 1fr; }
+      .shop__grid { grid-template-columns: repeat(2, 1fr); }
+      .featured__grid { grid-template-columns: repeat(3, 1fr); }
+      .footer__inner { grid-template-columns: 1.4fr 1fr 1fr; }
+    }
+
+    /* Mobile */
+    @media (max-width: 560px) {
+      :root { --gutter: 18px; }
+
+      .header__inner {
+        flex-wrap: wrap;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        gap: 10px;
+      }
+      .header__nav {
+        display: none;
+        order: 3;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        gap: 14px;
+        padding-top: 10px;
+        border-top: 0.5px solid var(--color-border-tertiary);
+        font-size: 12px;
+      }
+      .header__nav.is-open { display: flex; }
+      .header__menu-toggle { display: inline-block; }
+      .header__logo { font-size: 11px; padding: 6px 12px; }
+
+      .section-heading,
+      .about__heading { font-size: 22px; }
+      .cta__title { font-size: 24px; }
+
+      .hero__inner { padding-top: 36px; padding-bottom: 36px; gap: 28px; }
+      .hero__headline { font-size: 26px; }
+      .hero__sub { font-size: 14px; }
+      .hero__buttons { gap: 8px; }
+      .btn { font-size: 12px; padding: 10px 16px; }
+
+      .services__inner,
+      .process__inner,
+      .featured__inner,
+      .testimonials__inner,
+      .shop__inner,
+      .cta__inner { padding-top: 40px; padding-bottom: 40px; }
+      .about__inner { padding-top: 40px; padding-bottom: 40px; }
+
+      .services__grid { grid-template-columns: 1fr; }
+      .process__grid { grid-template-columns: 1fr; gap: 28px; }
+      .featured__grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .featured__head { flex-direction: column; align-items: flex-start; }
+      .shop__grid { grid-template-columns: repeat(2, 1fr); }
+      .shop__head { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .about__stats { gap: 20px; flex-wrap: wrap; }
+
+      .footer__inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        padding-top: 36px;
+        padding-bottom: 36px;
+      }
+      .footer__newsletter { grid-column: 1 / -1; }
+      .newsletter-form { max-width: 100%; }
+      .footer__bottom { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__logo">[ Logo ]</div>
+      <nav class="header__nav" id="nav">
+        <span>Services &#9662;</span>
+        <span>Shop</span>
+        <span>About</span>
+        <span>Journal</span>
+        <span>Contact</span>
+      </nav>
+      <button class="header__menu-toggle" aria-label="Open menu" onclick="document.getElementById('nav').classList.toggle('is-open')">&#9776;</button>
+      <button class="btn btn--primary">Book consult</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <div class="hero__eyebrow">[ Eyebrow &mdash; e.g. Personal Styling Since 2018 ]</div>
+        <h1 class="hero__headline">[ Specific headline &mdash; outcome-led, ~8&ndash;12 words ]</h1>
+        <p class="hero__sub">[ Subhead: who it's for + what they walk away with. 1&ndash;2 lines. ]</p>
+        <div class="hero__buttons">
+          <button class="btn btn--primary">Book a consultation</button>
+          <button class="btn btn--ghost">Explore services</button>
+        </div>
+        <div class="hero__trust">&#9733;&#9733;&#9733;&#9733;&#9733; &nbsp; [ Trust line: "100+ clients styled" or press logo strip ]</div>
+      </div>
+      <div class="hero__image">
+        [ Hero image: <br/>Jaclyn with a client <br/>or a single hero look ]
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="container services__inner">
+      <div class="section-head-center">
+        <div class="section-eyebrow">Services</div>
+        <h2 class="section-heading">[ Section heading &mdash; e.g. "Four ways to work together" ]</h2>
+      </div>
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__image"></div>
+          <div class="service-card__title">Custom clothing</div>
+          <div class="service-card__copy">[ 1-line value prop ]</div>
+          <div class="service-card__link">Learn more &rarr;</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card__image"></div>
+          <div class="service-card__title">Closet edits</div>
+          <div class="service-card__copy">[ 1-line value prop ]</div>
+          <div class="service-card__link">Learn more &rarr;</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card__image"></div>
+          <div class="service-card__title">Permanent jewelry</div>
+          <div class="service-card__copy">[ 1-line value prop ]</div>
+          <div class="service-card__link">Learn more &rarr;</div>
+        </div>
+        <div class="service-card">
+          <div class="service-card__image"></div>
+          <div class="service-card__title">Personal shopping</div>
+          <div class="service-card__copy">[ 1-line value prop ]</div>
+          <div class="service-card__link">Learn more &rarr;</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container process__inner">
+      <div class="section-head-center">
+        <div class="section-eyebrow">How it works</div>
+        <h2 class="section-heading">[ "From first call to final fitting" ]</h2>
+      </div>
+      <div class="process__grid">
+        <div class="process__step">
+          <div class="process__num">1</div>
+          <div class="process__title">Consultation</div>
+          <div class="process__copy">[ 2 lines on what happens in this step ]</div>
+        </div>
+        <div class="process__step">
+          <div class="process__num">2</div>
+          <div class="process__title">Plan &amp; source</div>
+          <div class="process__copy">[ 2 lines on what happens in this step ]</div>
+        </div>
+        <div class="process__step">
+          <div class="process__num">3</div>
+          <div class="process__title">Fit &amp; finish</div>
+          <div class="process__copy">[ 2 lines on what happens in this step ]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="container featured__inner">
+      <div class="featured__head">
+        <div>
+          <div class="section-eyebrow">Featured work</div>
+          <h2 class="section-heading">[ "Recent client looks" ]</h2>
+        </div>
+        <div class="featured__filters">
+          <span class="filter-chip filter-chip--active">All</span>
+          <span class="filter-chip">Custom</span>
+          <span class="filter-chip">Casual</span>
+          <span class="filter-chip">Formal</span>
+        </div>
+      </div>
+      <div class="featured__grid">
+        <div class="featured__tile">[ Captioned image ]</div>
+        <div class="featured__tile">[ Captioned image ]</div>
+        <div class="featured__tile">[ Captioned image ]</div>
+        <div class="featured__tile">[ Captioned image ]</div>
+        <div class="featured__tile">[ Captioned image ]</div>
+        <div class="featured__tile">[ Captioned image ]</div>
+      </div>
+      <div class="featured__cta">View full portfolio &rarr;</div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container about__inner">
+      <div class="about__image">[ Portrait of Jaclyn ]</div>
+      <div class="about__copy">
+        <div class="section-eyebrow">About</div>
+        <h2 class="about__heading">Meet Jaclyn</h2>
+        <p class="about__bio">[ Tight 3-sentence bio: background, philosophy, who she works with. Move long-form bio to /about. ]</p>
+        <div class="about__stats">
+          <div><strong>7+</strong>years styling</div>
+          <div><strong>100+</strong>clients</div>
+          <div><strong>[ # ]</strong>press features</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container testimonials__inner">
+      <div class="section-head-center">
+        <div class="section-eyebrow">Testimonials</div>
+        <h2 class="section-heading">[ "What clients say" ]</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial">
+          <p class="testimonial__quote">"[ Short quote &mdash; 2 sentences max ]"</p>
+          <div class="testimonial__name">[ Name ]</div>
+          <div class="testimonial__role">[ Role / city ]</div>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial__quote">"[ Short quote &mdash; 2 sentences max ]"</p>
+          <div class="testimonial__name">[ Name ]</div>
+          <div class="testimonial__role">[ Role / city ]</div>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial__quote">"[ Short quote &mdash; 2 sentences max ]"</p>
+          <div class="testimonial__name">[ Name ]</div>
+          <div class="testimonial__role">[ Role / city ]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop">
+    <div class="container shop__inner">
+      <div class="shop__head">
+        <div>
+          <div class="section-eyebrow">Shop</div>
+          <h2 class="section-heading">[ "Featured jewelry" ]</h2>
+        </div>
+        <div class="shop__link">Shop all &rarr;</div>
+      </div>
+      <div class="shop__grid">
+        <div>
+          <div class="product__image"></div>
+          <div class="product__name">[ Product ]</div>
+          <div class="product__price">$[ price ]</div>
+        </div>
+        <div>
+          <div class="product__image"></div>
+          <div class="product__name">[ Product ]</div>
+          <div class="product__price">$[ price ]</div>
+        </div>
+        <div>
+          <div class="product__image"></div>
+          <div class="product__name">[ Product ]</div>
+          <div class="product__price">$[ price ]</div>
+        </div>
+        <div>
+          <div class="product__image"></div>
+          <div class="product__name">[ Product ]</div>
+          <div class="product__price">$[ price ]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <h2 class="cta__title">[ "Ready to refine your wardrobe?" ]</h2>
+      <p class="cta__copy">[ One-line reassurance: free 15-min consult, no commitment ]</p>
+      <div class="cta__buttons">
+        <button class="btn btn--invert">Book consultation</button>
+        <button class="btn btn--ghost-invert">Get the style guide</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__newsletter">
+        <div class="footer__brand-logo">[ Logo ]</div>
+        <div>[ Newsletter signup: email input + subscribe button ]</div>
+        <form class="newsletter-form" onsubmit="event.preventDefault()">
+          <input type="email" placeholder="you@email.com" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li>Custom</li>
+          <li>Closet edits</li>
+          <li>Jewelry</li>
+          <li>Shopping</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li>About</li>
+          <li>Testimonials</li>
+          <li>FAQ</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li>Instagram</li>
+          <li>Pinterest</li>
+          <li>LinkedIn</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>&copy; Jaclyn Beattie</span>
+      <span>[ Privacy &middot; Terms ]</span>
+    </div>
+  </footer>
+
+</body>
+</html>

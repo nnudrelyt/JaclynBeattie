@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JB Custom — Bespoke Menswear</title>
+  <style>
+    :root {
+      --color-text-primary:        #1a1a1a;
+      --color-text-secondary:      #5e5d5b;
+      --color-text-tertiary:       #9a948a;
+      --color-text-info:           #2c5fa8;
+
+      --color-background-primary:  #ffffff;
+      --color-background-secondary:#f5f2ea;
+      --color-background-tertiary: #e8e3d4;
+
+      --color-border-tertiary:     rgba(0, 0, 0, 0.08);
+      --color-border-secondary:    rgba(0, 0, 0, 0.16);
+
+      --font-sans:  -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      --font-serif: "Georgia", "Times New Roman", serif;
+
+      --border-radius-md: 8px;
+      --border-radius-lg: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-text-primary);
+      background: #fafaf7;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .wireframe { width: 100%; max-width: 720px; }
+    .page { font-family: var(--font-sans); color: var(--color-text-primary); }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 22px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+      background: var(--color-background-primary);
+      gap: 16px;
+    }
+    .header__brand {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      letter-spacing: 3px;
+    }
+    .header__nav {
+      display: flex;
+      gap: 18px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--color-text-secondary);
+    }
+    .header__cta {
+      font-size: 11px;
+      padding: 7px 14px;
+      background: var(--color-text-primary);
+      color: var(--color-background-primary);
+      border-radius: 2px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .header__menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 6px;
+      cursor: pointer;
+      color: var(--color-text-primary);
+      font-size: 18px;
+    }
+
+    /* Hero */
+    .hero {
+      aspect-ratio: 16/9;
+      background: var(--color-background-tertiary);
+      border: 0.5px solid var(--color-border-secondary);
+      border-top: none;
+      display: flex;
+      align-items: end;
+      padding: 32px;
+      color: var(--color-text-tertiary);
+      position: relative;
+    }
+    .hero__inner { text-align: left; max-width: 60%; }
+    .hero__tag {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 14px;
+    }
+    .hero__headline {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--color-text-primary);
+      margin: 0 0 12px;
+    }
+    .hero__sub {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      max-width: 380px;
+    }
+
+    /* Section base */
+    .section {
+      padding: 28px 22px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-top: none;
+      background: var(--color-background-primary);
+    }
+    .section--cream { background: var(--color-background-secondary); }
+
+    .section__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+    .section__head--bordered {
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      padding-bottom: 12px;
+    }
+    .section__title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      margin: 0;
+    }
+    .section__meta {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--color-text-tertiary);
+      text-align: right;
+    }
+    .section__link {
+      font-size: 11px;
+      color: var(--color-text-info);
+    }
+
+    /* Range grid (4 categories) */
+    .range {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .range__item-image {
+      aspect-ratio: 3/4;
+      background: var(--color-background-tertiary);
+      border: 0.5px dashed var(--color-border-secondary);
+      margin-bottom: 8px;
+    }
+    .range__item-title {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+    .range__item-price {
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      letter-spacing: 0.5px;
+    }
+
+    /* Process (4 steps) */
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 0.5px solid var(--color-border-tertiary);
+    }
+    .process__step {
+      padding: 14px 12px 0;
+      border-right: 0.5px solid var(--color-border-tertiary);
+    }
+    .process__step:first-child { padding-left: 0; }
+    .process__step:last-child {
+      padding-right: 0;
+      border-right: none;
+    }
+    .process__num {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 8px;
+    }
+    .process__title {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .process__copy {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      line-height: 1.55;
+    }
+
+    /* Commissions */
+    .commissions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .commission__image {
+      aspect-ratio: 4/5;
+      background: var(--color-background-tertiary);
+      border: 0.5px dashed var(--color-border-secondary);
+      margin-bottom: 8px;
+    }
+    .commission__title {
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .commission__meta {
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* Quote */
+    .quote-section {
+      padding: 32px 22px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-top: none;
+      background: var(--color-background-secondary);
+      text-align: center;
+    }
+    .quote {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 480px;
+      margin: 0 auto 14px;
+      font-style: italic;
+      color: var(--color-text-primary);
+    }
+    .quote__attr {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* CTA footer */
+    .cta {
+      padding: 36px 22px;
+      border: 0.5px solid var(--color-border-secondary);
+      border-top: none;
+      border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+      background: var(--color-text-primary);
+      color: var(--color-background-primary);
+    }
+    .cta__grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .cta__title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      line-height: 1.3;
+      margin: 0 0 8px;
+    }
+    .cta__copy {
+      font-size: 12px;
+      opacity: 0.7;
+      line-height: 1.6;
+    }
+    .cta__button {
+      font-size: 11px;
+      padding: 10px 16px;
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+      text-align: center;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+      font-family: inherit;
+    }
+    .cta__hours {
+      font-size: 11px;
+      opacity: 0.6;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .back-link:hover { color: var(--color-text-primary); }
+
+    /* Tablet */
+    @media (max-width: 720px) {
+      body { padding: 24px 16px; }
+      .header__nav { gap: 12px; font-size: 10px; }
+      .hero { padding: 24px; }
+      .hero__inner { max-width: 80%; }
+      .hero__headline { font-size: 24px; }
+    }
+
+    /* Mobile */
+    @media (max-width: 560px) {
+      body { padding: 12px 8px; }
+
+      .header {
+        padding: 12px 16px;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .header__brand { font-size: 13px; letter-spacing: 2px; }
+      .header__nav {
+        display: none;
+        order: 3;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-top: 10px;
+        border-top: 0.5px solid var(--color-border-tertiary);
+      }
+      .header__nav.is-open { display: flex; }
+      .header__menu-toggle { display: inline-block; }
+      .header__cta {
+        font-size: 10px;
+        padding: 6px 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .hero {
+        aspect-ratio: auto;
+        min-height: 320px;
+        padding: 20px;
+      }
+      .hero__inner { max-width: 100%; }
+      .hero__headline { font-size: 22px; }
+      .hero__sub { font-size: 12px; }
+
+      .section { padding: 22px 16px; }
+      .section__head { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 14px; }
+      .section__meta { text-align: left; }
+
+      .range { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+      .process { grid-template-columns: 1fr; }
+      .process__step {
+        padding: 14px 0;
+        border-right: none;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+      }
+      .process__step:first-child { padding-top: 14px; padding-left: 0; }
+      .process__step:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .process__num { font-size: 18px; margin-bottom: 4px; }
+
+      .commissions { grid-template-columns: 1fr 1fr; }
+
+      .quote-section { padding: 24px 16px; }
+      .quote { font-size: 16px; }
+
+      .cta { padding: 24px 16px; }
+      .cta__grid { grid-template-columns: 1fr; gap: 16px; }
+      .cta__title { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wireframe">
+  <div class="page">
+
+    <header class="header">
+      <a href="index.html" class="header__brand">JB CUSTOM</a>
+      <nav class="header__nav" id="nav">
+        <span>SUITING</span><span>SPORT COATS</span><span>CASUAL</span><span>TUXEDO</span><span>PROCESS</span>
+      </nav>
+      <button class="header__menu-toggle" aria-label="Open menu" onclick="document.getElementById('nav').classList.toggle('is-open')">&#9776;</button>
+      <button class="header__cta">BOOK FITTING</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero__inner">
+        <div class="hero__tag">[ FULL-BLEED EDITORIAL HERO IMAGE ]</div>
+        <h1 class="hero__headline">[ Editorial headline &mdash; craft-led, ~10 words ]</h1>
+        <p class="hero__sub">[ Subhead naming the audience: men who want bespoke without a tailor. ]</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <a class="back-link" href="index.html">&larr; Back to Jaclyn Beattie</a>
+      <div class="section__head section__head--bordered">
+        <h2 class="section__title">The range</h2>
+        <div class="section__meta">FOUR CATEGORIES</div>
+      </div>
+      <div class="range">
+        <div>
+          <div class="range__item-image"></div>
+          <div class="range__item-title">Suiting</div>
+          <div class="range__item-price">FROM $[ price ]</div>
+        </div>
+        <div>
+          <div class="range__item-image"></div>
+          <div class="range__item-title">Sport coats</div>
+          <div class="range__item-price">FROM $[ price ]</div>
+        </div>
+        <div>
+          <div class="range__item-image"></div>
+          <div class="range__item-title">Casualwear</div>
+          <div class="range__item-price">FROM $[ price ]</div>
+        </div>
+        <div>
+          <div class="range__item-image"></div>
+          <div class="range__item-title">Tuxedo</div>
+          <div class="range__item-price">FROM $[ price ]</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream">
+      <div class="section__head">
+        <h2 class="section__title">The process</h2>
+        <div class="section__meta">FROM CONSULT TO DELIVERY &middot; 6&ndash;8 WEEKS</div>
+      </div>
+      <div class="process">
+        <div class="process__step">
+          <div class="process__num">01</div>
+          <div class="process__title">Consult</div>
+          <div class="process__copy">[ What gets discussed: lifestyle, wardrobe gaps, occasions ]</div>
+        </div>
+        <div class="process__step">
+          <div class="process__num">02</div>
+          <div class="process__title">Measure</div>
+          <div class="process__copy">[ Full set of measurements, posture and stance noted ]</div>
+        </div>
+        <div class="process__step">
+          <div class="process__num">03</div>
+          <div class="process__title">Source</div>
+          <div class="process__copy">[ Fabric selection from mills, lining and detail choices ]</div>
+        </div>
+        <div class="process__step">
+          <div class="process__num">04</div>
+          <div class="process__title">Fit &amp; finish</div>
+          <div class="process__copy">[ First fitting, adjustments, final hand-off ]</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title">Recent commissions</h2>
+        <a class="section__link" href="#">Full archive &rarr;</a>
+      </div>
+      <div class="commissions">
+        <div>
+          <div class="commission__image"></div>
+          <div class="commission__title">[ Commission name ]</div>
+          <div class="commission__meta">[ Fabric &middot; construction note ]</div>
+        </div>
+        <div>
+          <div class="commission__image"></div>
+          <div class="commission__title">[ Commission name ]</div>
+          <div class="commission__meta">[ Fabric &middot; construction note ]</div>
+        </div>
+        <div>
+          <div class="commission__image"></div>
+          <div class="commission__title">[ Commission name ]</div>
+          <div class="commission__meta">[ Fabric &middot; construction note ]</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <blockquote class="quote">"[ A short, credible quote from a male client &mdash; ideally named, ideally with public-facing credibility ]"</blockquote>
+      <div class="quote__attr">[ NAME ] &middot; [ ROLE / CITY ]</div>
+    </section>
+
+    <section class="cta">
+      <div class="cta__grid">
+        <div>
+          <h2 class="cta__title">Book a fitting</h2>
+          <p class="cta__copy">[ One sentence: how the consult works, where it happens, what to expect. ]</p>
+        </div>
+        <div>
+          <button class="cta__button">SCHEDULE CONSULT</button>
+          <div class="cta__hours">[ Studio location &middot; hours ]</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+</body>
+</html>
